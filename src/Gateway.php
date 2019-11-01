@@ -45,7 +45,7 @@ use Omnipay\Common\AbstractGateway;
  *   // as alternative method to creditcards you could also create a bank account.
  *   // This bank account can be used for testing.
  *
- *   $bankaccount = $this->gateway->createBankAccount([
+ *   $bankaccount = $this->gateway->createBank([
  *      'CustomerId' => $customer->getTransactionReference(),
  *      'RoutingNumber' => '131111114',
  *      'AccountNumber' => '751111111',
@@ -173,9 +173,9 @@ class Gateway extends AbstractGateway
      * @param  array|array $parameters
      * @return \Omnipay\Paysimple\Message\Response
      */
-    public function createBankAccount(array $parameters = array())
+    public function createBank(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\CreateBankAccountRequest', $parameters);
+        return $this->createRequest('\Omnipay\Paysimple\Message\CreateBankRequest', $parameters);
     }
 
     /**

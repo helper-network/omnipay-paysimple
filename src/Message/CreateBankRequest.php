@@ -2,7 +2,7 @@
 
 namespace Omnipay\Paysimple\Message;
 
-class CreateBankAccountRequest extends AbstractRequest
+class createBankRequest extends AbstractRequest
 {
 
     public function getCustomerId()

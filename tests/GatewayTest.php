@@ -9,7 +9,7 @@ use Omnipay\Common\CreditCard;
 class GatewayTest extends GatewayTestCase 
 {
 	
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->gateway = new Gateway($this->getHttpClient(), $this->getHttpRequest());
@@ -29,9 +29,9 @@ class GatewayTest extends GatewayTestCase
 		$this->assertSame('true', $request->getShippingSameAsBilling());
 	}
 
-	public function testCreateBankAccount()
+	public function testcreateBank()
 	{
-		$request = $this->gateway->createBankAccount([
+		$request = $this->gateway->createBank([
 			'CustomerId' => '123456',
 			'RoutingNumber' => '131111114',
 			'AccountNumber' => '751111111',
@@ -40,7 +40,7 @@ class GatewayTest extends GatewayTestCase
 			'IsDefault' => false,
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\CreateBankAccountRequest', $request);
+		$this->assertInstanceOf('Omnipay\Paysimple\Message\createBankRequest', $request);
 		$this->assertSame('123456', $request->getCustomerId());
 		$this->assertSame('131111114', $request->getRoutingNumber());
 		$this->assertSame('751111111', $request->getAccountNumber());
