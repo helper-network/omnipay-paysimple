@@ -1,5 +1,5 @@
 {
-    "name": "dranes/omnipay-paysimple",
+    "name": "helper-network/omnipay-paysimple",
     "type": "library",
     "description": "PaySimple driver for the Omnipay payment processing library",
     "keywords": [
