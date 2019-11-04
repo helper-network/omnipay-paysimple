@@ -3,7 +3,7 @@
 /**
  * PaySimple Gateway
  */
-namespace Omnipay\Paysimple;
+namespace Omnipay\PaySimple;
 
 use Omnipay\Common\AbstractGateway;
 
@@ -14,7 +14,7 @@ use Omnipay\Common\AbstractGateway;
  *
  * <code>
  *   // Create a gateway for the PaySimple Gateway
- *   $gateway = Omnipay::create('Paysimple');
+ *   $gateway = Omnipay::create('PaySimple');
  *   $gateway->setUsername('Your Username');
  *   $gateway->setSecret('You Secret');
  *   $this->gateway->setTestMode('true');
@@ -157,11 +157,11 @@ class Gateway extends AbstractGateway
      * request.
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function createCustomer(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\CreateCustomerRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\CreateCustomerRequest', $parameters);
     }
 
     /**
@@ -171,11 +171,11 @@ class Gateway extends AbstractGateway
      * to save the transaction reference to use it later on purchase request
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function createBank(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\CreateBankRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\CreateBankRequest', $parameters);
     }
 
     /**
@@ -184,11 +184,11 @@ class Gateway extends AbstractGateway
      * Retrieve all bank accounts from a customer
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function retrieveBankAccounts(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\RetrieveBankAccountsRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\RetrieveBankAccountsRequest', $parameters);
     }
 
     /**
@@ -197,11 +197,11 @@ class Gateway extends AbstractGateway
      * Retrieve all credit card accounts from a customer
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function retrieveCreditCards(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\RetrieveCreditCardsRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\RetrieveCreditCardsRequest', $parameters);
     }
 
     /**
@@ -210,11 +210,11 @@ class Gateway extends AbstractGateway
      * Delete a bank account using AccountId
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function deleteBankAccount(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\DeleteBankAccountRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\DeleteBankAccountRequest', $parameters);
     }
 
     /**
@@ -223,11 +223,11 @@ class Gateway extends AbstractGateway
      * Delete a credit card using AccountId
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function deleteCreditCard(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\DeleteCreditCardRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\DeleteCreditCardRequest', $parameters);
     }
 
     /**
@@ -238,11 +238,11 @@ class Gateway extends AbstractGateway
      * the Bank Account method or the Credit Card method.
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function purchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\PurchaseRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\PurchaseRequest', $parameters);
     }
 
     /**
@@ -252,11 +252,11 @@ class Gateway extends AbstractGateway
      * to save the transaction reference to ue it later on purchase request.
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function createCard(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\CreateCardRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\CreateCardRequest', $parameters);
     }
 
     /**
@@ -266,11 +266,11 @@ class Gateway extends AbstractGateway
      * as part of and end-of-day batch can be voided.
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function void(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\VoidRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\VoidRequest', $parameters);
     }
 
     /**
@@ -279,11 +279,11 @@ class Gateway extends AbstractGateway
      * Any Settled payment can be refunded.
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function refund(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\RefundRequest', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\RefundRequest', $parameters);
     }
 
     /**
@@ -292,10 +292,10 @@ class Gateway extends AbstractGateway
      * Single Payment Objects
      *
      * @param  array|array $parameters
-     * @return \Omnipay\Paysimple\Message\Response
+     * @return \Omnipay\PaySimple\Message\Response
      */
     public function retrievePayment(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paysimple\Message\RetrievePayment', $parameters);
+        return $this->createRequest('\Omnipay\PaySimple\Message\RetrievePayment', $parameters);
     }
 }

@@ -23,7 +23,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Omnipay\\Paysimple\\" : "src/" }
+        "psr-4": { "Omnipay\\PaySimple\\" : "src/" }
     },
     "require": {
         "helper-network/omnipay-common": "dev-master as v4.0.0",

@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\Paysimple;
+namespace Omnipay\PaySimple;
 
 use Omnipay\Tests\GatewayTestCase;
 use Omnipay\Omnipay;
@@ -23,7 +23,7 @@ class GatewayTest extends GatewayTestCase
 			'ShippingSameAsBilling' => "true"
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\CreateCustomerRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\CreateCustomerRequest', $request);
 		$this->assertSame('Andres', $request->getFirstName());
 		$this->assertSame('Garcia', $request->getLastName());
 		$this->assertSame('true', $request->getShippingSameAsBilling());
@@ -40,7 +40,7 @@ class GatewayTest extends GatewayTestCase
 			'IsDefault' => false,
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\createBankRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\createBankRequest', $request);
 		$this->assertSame('123456', $request->getCustomerId());
 		$this->assertSame('131111114', $request->getRoutingNumber());
 		$this->assertSame('751111111', $request->getAccountNumber());
@@ -56,7 +56,7 @@ class GatewayTest extends GatewayTestCase
 			'Amount' => '50.70'
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\PurchaseRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\PurchaseRequest', $request);
 		$this->assertSame('789123', $request->getAccountId());
 		$this->assertSame('50.70', $request->getAmount());
 	}
@@ -76,7 +76,7 @@ class GatewayTest extends GatewayTestCase
 			'IsDefault' => false
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\CreateCardRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\CreateCardRequest', $request);
 		$this->assertSame('012345', $request->getCustomerId());
 		$this->assertSame(13, $request->getIssuer());
 		$this->assertSame(false, $request->getIsDefault());
@@ -88,7 +88,7 @@ class GatewayTest extends GatewayTestCase
 			'PaymentId' => 467890
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\VoidRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\VoidRequest', $request);
 		$this->assertSame(467890, $request->getPaymentId());
 	}
 	
@@ -98,7 +98,7 @@ class GatewayTest extends GatewayTestCase
 			'PaymentId' => 467890
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\RefundRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\RefundRequest', $request);
 		$this->assertSame(467890, $request->getPaymentId());
 	}
 
@@ -108,7 +108,7 @@ class GatewayTest extends GatewayTestCase
 			'PaymentId' => 467890
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\RetrievePayment', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\RetrievePayment', $request);
 		$this->assertSame(467890, $request->getPaymentId());
 	}
 
@@ -118,7 +118,7 @@ class GatewayTest extends GatewayTestCase
 			'CustomerId' => 1234567
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\RetrieveBankAccountsRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\RetrieveBankAccountsRequest', $request);
 		$this->assertSame(1234567, $request->getCustomerId());
 	}
 
@@ -128,7 +128,7 @@ class GatewayTest extends GatewayTestCase
 			'CustomerId' => 1234567
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\RetrieveCreditCardsRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\RetrieveCreditCardsRequest', $request);
 		$this->assertSame(1234567, $request->getCustomerId());
 	}
 	
@@ -138,7 +138,7 @@ class GatewayTest extends GatewayTestCase
 			'AccountId' => 635402
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\DeleteCreditCardRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\DeleteCreditCardRequest', $request);
 		$this->assertSame(635402, $request->getAccountId());
 	}
 
@@ -148,7 +148,7 @@ class GatewayTest extends GatewayTestCase
 			'AccountId' => 635402
 		]);
 
-		$this->assertInstanceOf('Omnipay\Paysimple\Message\DeleteBankAccountRequest', $request);
+		$this->assertInstanceOf('Omnipay\PaySimple\Message\DeleteBankAccountRequest', $request);
 		$this->assertSame(635402, $request->getAccountId());
 	}
 }

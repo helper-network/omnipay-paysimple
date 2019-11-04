@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\Paysimple\Message;
+namespace Omnipay\PaySimple\Message;
 
 class RefundRequest extends AbstractRequest
 {
