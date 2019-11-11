@@ -18,10 +18,8 @@ class Response implements \Omnipay\Common\Message\ResponseInterface
     public function isSuccessful()
     {
         $failureData = false;
-        $message = $this->getMessage();
-        if (is_array($message)
-            && isset($message['Response']['FailureData'])
-            && is_array($message['Response']['FailureData'])) {
+        $message = $this->loadMessage();
+        if (is_array($message) && isset($message['Meta']['Errors'])) {
             $failureData = true;
         }
 
@@ -37,11 +35,26 @@ class Response implements \Omnipay\Common\Message\ResponseInterface
     {
         return false;
     }
-    
+
     public function getMessage()
     {
-        $this->response->getBody()->rewind();
-        return json_decode($this->response->getBody()->getContents(), true);
+    	$messageString = [];
+    	$messageData = $this->loadMessage();
+		if (is_array($messageData) && isset($messageData['Meta']['Errors'])) {
+			foreach ($messageData['Mete']['Errors'] as $error) {
+				$code = $error['ErrorCode'];
+				$messageString .= "Error Code: $code\n";
+				foreach($error['ErrorMessages'] as $message){
+					$field = $message['Field'];
+					$message = $message['Message'];
+					$messageString.= "Field: $field. Message: $message";
+				}
+			}
+		} else {
+			return $messageData;
+		}
+
+		return $messageString;
     }
     
     public function getCode()
@@ -62,4 +75,10 @@ class Response implements \Omnipay\Common\Message\ResponseInterface
     {
         return $this->request->getData();
     }
+
+    private function loadMessage()
+	{
+		$this->response->getBody()->rewind();
+		return json_decode($this->response->getBody()->getContents(), true);
+	}
 }
