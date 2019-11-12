@@ -41,7 +41,7 @@ class Response implements \Omnipay\Common\Message\ResponseInterface
     	$messageString = [];
     	$messageData = $this->loadMessage();
 		if (is_array($messageData) && isset($messageData['Meta']['Errors'])) {
-			foreach ($messageData['Mete']['Errors'] as $error) {
+			foreach ($messageData['Meta']['Errors'] as $error) {
 				$code = $error['ErrorCode'];
 				$messageString .= "Error Code: $code\n";
 				foreach($error['ErrorMessages'] as $message){
