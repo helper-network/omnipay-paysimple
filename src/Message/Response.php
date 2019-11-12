@@ -38,7 +38,7 @@ class Response implements \Omnipay\Common\Message\ResponseInterface
 
     public function getMessage()
     {
-    	$messageString = [];
+    	$messageString = '';
     	$messageData = $this->loadMessage();
 		if (is_array($messageData) && isset($messageData['Meta']['Errors'])) {
 			$code = $messageData['Meta']['Errors']['ErrorCode'];
