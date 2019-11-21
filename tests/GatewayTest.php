@@ -2,24 +2,23 @@
 
 namespace Omnipay\PaySimple;
 
+use Omnipay\PaySimple\Message\DeleteBankAccountRequest;
 use Omnipay\Tests\GatewayTestCase;
 use Omnipay\Omnipay;
 use Omnipay\Common\CreditCard;
 
-class GatewayTest extends GatewayTestCase 
-{
-	
+class GatewayTest extends GatewayTestCase {
+
 	public function setUp(): void {
 		parent::setUp();
 
 		$this->gateway = new Gateway($this->getHttpClient(), $this->getHttpRequest());
 	}
 
-	public function testCreateCustomer()
-	{
+	public function testCreateCustomer() {
 		$request = $this->gateway->createCustomer([
-			'FirstName' => 'Andres',
-			'LastName' => 'Garcia',
+			'FirstName'             => 'Andres',
+			'LastName'              => 'Garcia',
 			'ShippingSameAsBilling' => "true"
 		]);
 
@@ -29,15 +28,14 @@ class GatewayTest extends GatewayTestCase
 		$this->assertSame('true', $request->getShippingSameAsBilling());
 	}
 
-	public function testcreateBank()
-	{
+	public function testcreateBank() {
 		$request = $this->gateway->createBank([
-			'CustomerId' => '123456',
-			'RoutingNumber' => '131111114',
-			'AccountNumber' => '751111111',
-			'BankName' => 'PaySimple Bank',
+			'CustomerId'        => '123456',
+			'RoutingNumber'     => '131111114',
+			'AccountNumber'     => '751111111',
+			'BankName'          => 'PaySimple Bank',
 			'IsCheckingAccount' => true,
-			'IsDefault' => false,
+			'IsDefault'         => false,
 		]);
 
 		$this->assertInstanceOf('Omnipay\PaySimple\Message\createBankRequest', $request);
@@ -48,12 +46,11 @@ class GatewayTest extends GatewayTestCase
 		$this->assertSame(true, $request->getIsCheckingAccount());
 		$this->assertSame(false, $request->getIsDefault());
 	}
-	
-	public function testPurchase()
-	{
+
+	public function testPurchase() {
 		$request = $this->gateway->purchase([
 			'AccountId' => '789123',
-			'Amount' => '50.70'
+			'Amount'    => '50.70'
 		]);
 
 		$this->assertInstanceOf('Omnipay\PaySimple\Message\PurchaseRequest', $request);
@@ -61,19 +58,18 @@ class GatewayTest extends GatewayTestCase
 		$this->assertSame('50.70', $request->getAmount());
 	}
 
-	public function testCreateCard()
-	{
+	public function testCreateCard() {
 		$card = new CreditCard([
-			'number' => '5454545454545454',
+			'number'      => '5454545454545454',
 			'expiryMonth' => '13',
-			'expiryYear' => '2021',
+			'expiryYear'  => '2021',
 		]);
 
 		$request = $this->gateway->createCard([
-			'card' => $card,
+			'card'       => $card,
 			'CustomerId' => '012345',
-			'Issuer' => 13,
-			'IsDefault' => false
+			'Issuer'     => 13,
+			'IsDefault'  => false
 		]);
 
 		$this->assertInstanceOf('Omnipay\PaySimple\Message\CreateCardRequest', $request);
@@ -81,9 +77,8 @@ class GatewayTest extends GatewayTestCase
 		$this->assertSame(13, $request->getIssuer());
 		$this->assertSame(false, $request->getIsDefault());
 	}
-	
-	public function testVoid()
-	{
+
+	public function testVoid() {
 		$request = $this->gateway->void([
 			'PaymentId' => 467890
 		]);
@@ -91,9 +86,8 @@ class GatewayTest extends GatewayTestCase
 		$this->assertInstanceOf('Omnipay\PaySimple\Message\VoidRequest', $request);
 		$this->assertSame(467890, $request->getPaymentId());
 	}
-	
-	public function testRefund()
-	{
+
+	public function testRefund() {
 		$request = $this->gateway->refund([
 			'PaymentId' => 467890
 		]);
@@ -102,8 +96,7 @@ class GatewayTest extends GatewayTestCase
 		$this->assertSame(467890, $request->getPaymentId());
 	}
 
-	public function testRetrievePayment()
-	{
+	public function testRetrievePayment() {
 		$request = $this->gateway->retrievePayment([
 			'PaymentId' => 467890
 		]);
@@ -112,8 +105,7 @@ class GatewayTest extends GatewayTestCase
 		$this->assertSame(467890, $request->getPaymentId());
 	}
 
-	public function testRetrieveBankAccounts()
-	{
+	public function testRetrieveBankAccounts() {
 		$request = $this->gateway->retrieveBankAccounts([
 			'CustomerId' => 1234567
 		]);
@@ -122,8 +114,7 @@ class GatewayTest extends GatewayTestCase
 		$this->assertSame(1234567, $request->getCustomerId());
 	}
 
-	public function testRetrieveCreditCards()
-	{
+	public function testRetrieveCreditCards() {
 		$request = $this->gateway->retrieveCreditCards([
 			'CustomerId' => 1234567
 		]);
@@ -131,9 +122,8 @@ class GatewayTest extends GatewayTestCase
 		$this->assertInstanceOf('Omnipay\PaySimple\Message\RetrieveCreditCardsRequest', $request);
 		$this->assertSame(1234567, $request->getCustomerId());
 	}
-	
-	public function testDeleteCreditCard()
-	{
+
+	public function testDeleteCreditCard() {
 		$request = $this->gateway->deleteCreditCard([
 			'AccountId' => 635402
 		]);
@@ -142,13 +132,24 @@ class GatewayTest extends GatewayTestCase
 		$this->assertSame(635402, $request->getAccountId());
 	}
 
-	public function testDeleteBankAccount()
-	{
+	public function testDeleteBankAccount() {
 		$request = $this->gateway->deleteBankAccount([
 			'AccountId' => 635402
 		]);
 
 		$this->assertInstanceOf('Omnipay\PaySimple\Message\DeleteBankAccountRequest', $request);
 		$this->assertSame(635402, $request->getAccountId());
+	}
+
+	public function testBadCredentials()
+	{
+		$this->setMockHttpResponse('TestInvalidCredentials.txt');
+
+		$request = $this->gateway->purchase([]);
+		$stuff = $request->send();
+		$this->assertNotTrue($stuff->isSuccessful());
+
+		$this->assertEquals(401, $stuff->getCode());
+		$this->assertEquals('Error: Invalid Credentials.', $stuff->getMessage());
 	}
 }

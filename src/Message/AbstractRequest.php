@@ -80,7 +80,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         } catch (ClientErrorResponseException $e) {
             $httpResponse = $e->getResponse();
         }
-        
+
         return (new Response($this, $httpResponse));
     }
 

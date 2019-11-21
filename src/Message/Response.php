@@ -40,6 +40,9 @@ class Response implements \Omnipay\Common\Message\ResponseInterface
     {
     	$messageString = '';
     	$messageData = $this->loadMessage();
+		if ($this->response->getStatusCode() === 401) {
+			return 'Error: Invalid Credentials.';
+		}
 		if (is_array($messageData) && isset($messageData['Meta']['Errors'])) {
 			$code = $messageData['Meta']['Errors']['ErrorCode'];
 			$messageString .= "Error Code: $code\n";

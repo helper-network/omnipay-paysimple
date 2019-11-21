@@ -6,6 +6,7 @@
 namespace Omnipay\PaySimple;
 
 use Omnipay\Common\AbstractGateway;
+use Omnipay\Common\Message\AbstractRequest;
 
 /**
  * PaySimple Gateway.
@@ -149,151 +150,151 @@ class Gateway extends AbstractGateway
         return $this->setParameter('secret', $value);
     }
 
-    /**
-     * Create Customer Request
-     *
-     * For PaySimple gateway you always need to create a customer first
-     * and use the transaction reference in the response later on any CreditCard or BankAccount
-     * request.
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Create Customer Request
+	 *
+	 * For PaySimple gateway you always need to create a customer first
+	 * and use the transaction reference in the response later on any CreditCard or BankAccount
+	 * request.
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function createCustomer(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\CreateCustomerRequest', $parameters);
     }
 
-    /**
-     * Create Bank Account Request
-     *
-     * You can use ACH as an alternative payment method it's important
-     * to save the transaction reference to use it later on purchase request
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Create Bank Account Request
+	 *
+	 * You can use ACH as an alternative payment method it's important
+	 * to save the transaction reference to use it later on purchase request
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function createBank(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\CreateBankRequest', $parameters);
     }
 
-    /**
-     * Retrieve Bank Accounts Request
-     *
-     * Retrieve all bank accounts from a customer
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Retrieve Bank Accounts Request
+	 *
+	 * Retrieve all bank accounts from a customer
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function retrieveBankAccounts(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\RetrieveBankAccountsRequest', $parameters);
     }
 
-    /**
-     * Retrieve Credit Cards Request
-     *
-     * Retrieve all credit card accounts from a customer
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Retrieve Credit Cards Request
+	 *
+	 * Retrieve all credit card accounts from a customer
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function retrieveCreditCards(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\RetrieveCreditCardsRequest', $parameters);
     }
 
-    /**
-     * Delete Bank Account Request
-     *
-     * Delete a bank account using AccountId
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Delete Bank Account Request
+	 *
+	 * Delete a bank account using AccountId
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function deleteBankAccount(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\DeleteBankAccountRequest', $parameters);
     }
 
-    /**
-     * Delete Credit Card Request
-     *
-     * Delete a credit card using AccountId
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Delete Credit Card Request
+	 *
+	 * Delete a credit card using AccountId
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function deleteCreditCard(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\DeleteCreditCardRequest', $parameters);
     }
 
-    /**
-     * Purchase Request
-     *
-     * After create a Bank Account or a Credit Card you can charge a client
-     * with this method, you need to pass the transaction reference returned by either
-     * the Bank Account method or the Credit Card method.
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Purchase Request
+	 *
+	 * After create a Bank Account or a Credit Card you can charge a client
+	 * with this method, you need to pass the transaction reference returned by either
+	 * the Bank Account method or the Credit Card method.
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function purchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\PurchaseRequest', $parameters);
     }
 
-    /**
-     * Create Credit Card Request
-     *
-     * Create a Credit Card and associate with a customer it's important
-     * to save the transaction reference to ue it later on purchase request.
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Create Credit Card Request
+	 *
+	 * Create a Credit Card and associate with a customer it's important
+	 * to save the transaction reference to ue it later on purchase request.
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function createCard(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\CreateCardRequest', $parameters);
     }
 
-    /**
-     * Void Request
-     *
-     * Any succesfully authorized payment that has not yet been submitted
-     * as part of and end-of-day batch can be voided.
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Void Request
+	 *
+	 * Any succesfully authorized payment that has not yet been submitted
+	 * as part of and end-of-day batch can be voided.
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function void(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\VoidRequest', $parameters);
     }
 
-    /**
-     * Refund Request
-     *
-     * Any Settled payment can be refunded.
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Refund Request
+	 *
+	 * Any Settled payment can be refunded.
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function refund(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\RefundRequest', $parameters);
     }
 
-    /**
-     * Retrieve Payment
-     *
-     * Single Payment Objects
-     *
-     * @param  array|array $parameters
-     * @return \Omnipay\PaySimple\Message\Response
-     */
+	/**
+	 * Retrieve Payment
+	 *
+	 * Single Payment Objects
+	 *
+	 * @param array|array $parameters
+	 * @return AbstractRequest
+	 */
     public function retrievePayment(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\RetrievePayment', $parameters);
