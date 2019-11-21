@@ -25,9 +25,9 @@ class createBankRequest extends AbstractRequest
         return $this->getParameter('BankName');
     }
 
-    public function getIsCheckingAccount()
+    public function getAccountType()
     {
-        return $this->getParameter('IsCheckingAccount');
+        return $this->getParameter('AccountType');
     }
 
     public function getIsDefault()
@@ -55,9 +55,9 @@ class createBankRequest extends AbstractRequest
         return $this->setParameter('BankName', $value);
     }
 
-    public function setIsCheckingAccount($value)
+    public function setAccountType($value)
     {
-        return $this->setParameter('IsCheckingAccount', $value);
+        return $this->setParameter('AccountType', $value);
     }
 
     public function setIsDefault($value)
@@ -73,7 +73,7 @@ class createBankRequest extends AbstractRequest
         $data['RoutingNumber'] = $this->getRoutingNumber();
         $data['AccountNumber'] = $this->getAccountNumber();
         $data['BankName'] = $this->getBankName();
-        $data['IsCheckingAccount'] = $this->getIsCheckingAccount();
+        $data['IsCheckingAccount'] = $this->getAccountType() !== 'savings';
         $data['IsDefault'] = $this->getIsDefault();
 
         return $data;
