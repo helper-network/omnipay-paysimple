@@ -89,29 +89,29 @@ class GatewayTest extends GatewayTestCase {
 
 	public function testVoid(): void {
 		$request = $this->gateway->void([
-			'PaymentId' => 467890
+			'TransactionId' => 467890
 		]);
 
 		$this->assertInstanceOf(VoidRequest::class, $request);
-		$this->assertSame(467890, $request->getPaymentId());
+		$this->assertSame(467890, $request->getTransactionId());
 	}
 
 	public function testRefund(): void {
 		$request = $this->gateway->refund([
-			'PaymentId' => 467890
+			'TransactionId' => 467890
 		]);
 
 		$this->assertInstanceOf(RefundRequest::class, $request);
-		$this->assertSame(467890, $request->getPaymentId());
+		$this->assertSame(467890, $request->getTransactionId());
 	}
 
 	public function testRetrievePayment(): void {
 		$request = $this->gateway->retrievePayment([
-			'PaymentId' => 467890
+			'TransactionId' => 467890
 		]);
 
 		$this->assertInstanceOf(RetrievePayment::class, $request);
-		$this->assertSame(467890, $request->getPaymentId());
+		$this->assertSame(467890, $request->getTransactionId());
 	}
 
 	public function testRetrieveBankAccounts(): void {
