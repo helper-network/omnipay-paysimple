@@ -77,6 +77,10 @@ class Response implements \Omnipay\Common\Message\ResponseInterface
         return $this->request->getData();
     }
 
+    public function getAmount(){
+		return $this->request->getData()['Amount'];
+	}
+
     private function loadMessage()
 	{
 		$this->response->getBody()->rewind();
