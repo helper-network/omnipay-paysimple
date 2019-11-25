@@ -88,9 +88,10 @@ class Response implements \Omnipay\Common\Message\ResponseInterface
 	}
 
 	public function getStatus(){
-		$status = strtolower($this->response->getData()['Status']);
+		$message = $this->loadMessage();
+		$status = strtolower($message['Response']['Status']);
 
-		if($status === 'RefundSettled' || $status === 'settled'){
+		if($status === 'refundsettled' || $status === 'settled'){
 			return 'settled';
 		}
 
