@@ -86,4 +86,14 @@ class Response implements \Omnipay\Common\Message\ResponseInterface
 		$this->response->getBody()->rewind();
 		return json_decode($this->response->getBody()->getContents(), true);
 	}
+
+	public function getStatus(){
+		$status = strtolower($this->response->getData()['Status']);
+
+		if($status === 'RefundSettled' || $status === 'settled'){
+			return 'settled';
+		}
+
+		return 'submitted';
+	}
 }

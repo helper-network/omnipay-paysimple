@@ -3,6 +3,7 @@
 namespace Omnipay\PaySimple;
 
 use Omnipay\PaySimple\Message\DeleteBankAccountRequest;
+use Omnipay\PaySimple\Message\StatusRequest;
 use Omnipay\Tests\GatewayTestCase;
 use Omnipay\Common\CreditCard;
 use Omnipay\PaySimple\Message\createBankRequest;
@@ -148,6 +149,15 @@ class GatewayTest extends GatewayTestCase {
 
 		$this->assertInstanceOf(DeleteBankAccountRequest::class, $request);
 		$this->assertSame(635402, $request->getAccountId());
+	}
+
+	public function testStatus(): void {
+		$request = $this->gateway->getStatus([
+			'TransactionId' => 635402
+		]);
+
+		$this->assertInstanceOf(StatusRequest::class, $request);
+		$this->assertSame(635402, $request->getTransactionId());
 	}
 
 	public function testBadCredentials(): void {

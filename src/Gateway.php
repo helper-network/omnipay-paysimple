@@ -7,6 +7,7 @@ namespace Omnipay\PaySimple;
 
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\PaySimple\Message\StatusRequest;
 
 /**
  * PaySimple Gateway.
@@ -299,4 +300,8 @@ class Gateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\PaySimple\Message\RetrievePayment', $parameters);
     }
+
+	public function getStatus(array $parameters = []) {
+		return $this->createRequest(StatusRequest::class, $parameters);
+	}
 }
